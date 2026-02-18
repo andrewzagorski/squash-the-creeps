@@ -30,12 +30,15 @@ public partial class Main : Node
 
         AddChild(mob);
 
-        mob.Squashed += GetNode<ScoreLabel>("UserInterface/ScoreLabel").OnMobSquashed;
+        mob.Squashed += GetNode<Score>("Score").OnMobSquashed;
     }
 
     private void OnPlayerHit()
     {
         GetNode<Timer>("MobTimer").Stop();
+        int score = GetNode<Score>("Score").CurrentScore;
+        GetNode<Label>("UserInterface/Retry/RetryLabel").Text = $"Final score: {score}\nPress Enter to Retry";
+        GetNode<Label>("UserInterface/ScoreLabel").Hide();
         GetNode<Control>("UserInterface/Retry").Show();
     }
 

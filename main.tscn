@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://defdm2qdva75q" path="res://mob.tscn" id="2_1bvp3"]
 [ext_resource type="FontFile" uid="uid://cyxhh7ddkn62q" path="res://fonts/Montserrat-Medium.ttf" id="4_lquwl"]
 [ext_resource type="Script" uid="uid://b6yqacnxiq0jo" path="res://ScoreLabel.cs" id="5_7mycd"]
+[ext_resource type="Script" uid="uid://w6u2b0ed152s" path="res://Score.cs" id="6_7mycd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
 size = Vector3(60, 2, 60)
@@ -101,6 +102,16 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_272bh")
 
+[node name="ScoreLabel" type="Label" parent="UserInterface" unique_id=115758410]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 101.0
+offset_bottom = 63.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Score: 0"
+script = ExtResource("5_7mycd")
+
 [node name="Retry" type="ColorRect" parent="UserInterface" unique_id=390402427]
 layout_mode = 1
 anchors_preset = 15
@@ -110,7 +121,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.36862746)
 
-[node name="Label" type="Label" parent="UserInterface/Retry" unique_id=1609538493]
+[node name="RetryLabel" type="Label" parent="UserInterface/Retry" unique_id=1609538493]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -125,15 +136,8 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Press Enter to retry"
 
-[node name="ScoreLabel" type="Label" parent="UserInterface" unique_id=115758410]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 40.0
-offset_right = 101.0
-offset_bottom = 63.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Score: 0"
-script = ExtResource("5_7mycd")
+[node name="Score" type="Node" parent="." unique_id=972842495]
+script = ExtResource("6_7mycd")
 
 [connection signal="Hit" from="Player" to="." method="OnPlayerHit"]
 [connection signal="timeout" from="MobTimer" to="." method="OnMobTimerTimeout"]

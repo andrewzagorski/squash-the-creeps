@@ -15,6 +15,9 @@ public partial class Player : CharacterBody3D
     [Export]
     public int BounceImpulse { get; set; } = 16;
 
+    [Signal]
+    public delegate void HitEventHandler();
+
     private Vector3 _targetVelocity = Vector3.Zero;
 
     public override void _PhysicsProcess(double delta)
@@ -45,6 +48,18 @@ public partial class Player : CharacterBody3D
         {
             direction = direction.Normalized();
             GetNode<Node3D>("Pivot").Basis = Basis.LookingAt(direction);
+            if (!IsOnFloor())
+            {
+                GetNode<AnimationPlayer>("AnimationPlayer").SpeedScale = 1;
+            }
+            else
+            {
+                GetNode<AnimationPlayer>("AnimationPlayer").SpeedScale = 4;
+            }
+        }
+        else
+        {
+            GetNode<AnimationPlayer>("AnimationPlayer").SpeedScale = 1;
         }
 
         _targetVelocity.X = direction.X * Speed;
@@ -73,7 +88,21 @@ public partial class Player : CharacterBody3D
             }
         }
 
+        var pivot = GetNode<Node3D>("Pivot");
+        pivot.Rotation = new Vector3(Mathf.Pi / 6.0f * Velocity.Y / JumpImpulse, pivot.Rotation.Y, pivot.Rotation.Z);
+
         Velocity = _targetVelocity;
         MoveAndSlide();
+    }
+
+    private void Die()
+    {
+        EmitSignal(SignalName.Hit);
+        QueueFree();
+    }
+
+    private void OnMobDetectorBodyEntered(Node3D body)
+    {
+        Die();
     }
 }

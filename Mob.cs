@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class Mob : CharacterBody3D
 {
@@ -20,14 +19,16 @@ public partial class Mob : CharacterBody3D
     public void Initialize(Vector3 startPosition, Vector3 playerPosition)
     {
         LookAtFromPosition(startPosition, playerPosition, Vector3.Up);
-
-        RotateY((float)GD.RandRange(-Mathf.Pi / 4, Mathf.Pi / 4));
+        RotateY((float)GD.RandRange(-Mathf.Pi / 4.0, Mathf.Pi / 4.0));
+        Rotation = new Vector3(0, Rotation.Y, 0);
 
         int randomSpeed = GD.RandRange(MinSpeed, MaxSpeed);
 
         Velocity = Vector3.Forward * randomSpeed;
 
         Velocity = Velocity.Rotated(Vector3.Up, Rotation.Y);
+
+        GetNode<AnimationPlayer>("AnimationPlayer").SpeedScale = randomSpeed / MinSpeed;
     }
 
     private void OnVisibilityNotifierScreenExited()

@@ -20,6 +20,8 @@ public partial class Player : CharacterBody3D
 
     private Vector3 _targetVelocity = Vector3.Zero;
 
+    private int _squashMultiplier = 1;
+
     public override void _PhysicsProcess(double delta)
     {
         var direction = Vector3.Zero;
@@ -72,6 +74,7 @@ public partial class Player : CharacterBody3D
         else if (Input.IsActionJustPressed("jump"))
         {
             _targetVelocity.Y = JumpImpulse;
+            _squashMultiplier = 1;
         }
 
         for (int index = 0; index < GetSlideCollisionCount(); index++)
@@ -81,8 +84,9 @@ public partial class Player : CharacterBody3D
             {
                 if (Vector3.Up.Dot(collision.GetNormal()) > 0.1f)
                 {
-                    mob.Squash();
+                    mob.Squash(_squashMultiplier);
                     _targetVelocity.Y = BounceImpulse;
+                    _squashMultiplier++;
                     break;
                 }
             }

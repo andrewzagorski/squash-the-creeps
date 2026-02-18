@@ -37,7 +37,8 @@ public partial class Main : Node
     {
         GetNode<Timer>("MobTimer").Stop();
         int score = GetNode<Score>("Score").CurrentScore;
-        GetNode<Label>("UserInterface/Retry/RetryLabel").Text = $"Final score: {score}\nPress Enter to Retry";
+        int maxMultiplier = GetNode<Score>("Score").MaxMultiplier;
+        GetNode<Label>("UserInterface/Retry/RetryLabel").Text = $"Final score: {score}\nMax multiplier: {maxMultiplier}\nPress Enter to Retry";
         GetNode<Label>("UserInterface/ScoreLabel").Hide();
         GetNode<Control>("UserInterface/Retry").Show();
     }

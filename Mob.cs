@@ -9,7 +9,7 @@ public partial class Mob : CharacterBody3D
     public int MaxSpeed { get; set; } = 18;
 
     [Signal]
-    public delegate void SquashedEventHandler();
+    public delegate void SquashedEventHandler(int multiplier);
 
     public override void _PhysicsProcess(double delta)
     {
@@ -36,9 +36,9 @@ public partial class Mob : CharacterBody3D
         QueueFree();
     }
 
-    public void Squash()
+    public void Squash(int multiplier = 1)
     {
-        EmitSignal(SignalName.Squashed);
+        EmitSignal(SignalName.Squashed, multiplier);
         QueueFree();
     }
 }

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://defdm2qdva75q"]
 
 [ext_resource type="Script" uid="uid://p0p4cg20qdw2" path="res://Mob.cs" id="1_nokgg"]
+[ext_resource type="PackedScene" uid="uid://d01qu4ggmixxl" path="res://hit_marker.tscn" id="2_p11y5"]
 [ext_resource type="PackedScene" uid="uid://bicorb7we351t" path="res://art/mob.glb" id="2_ubaqv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p11y5"]
@@ -44,6 +45,7 @@ _data = {
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_nokgg")
+HitMarkerScene = ExtResource("2_p11y5")
 
 [node name="Pivot" type="Node3D" parent="." unique_id=782111824]
 

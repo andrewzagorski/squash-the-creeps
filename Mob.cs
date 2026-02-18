@@ -1,7 +1,11 @@
 using Godot;
+using System;
 
 public partial class Mob : CharacterBody3D
 {
+    [Export]
+    public PackedScene HitMarkerScene { get; set; }
+
     [Export]
     public int MinSpeed { get; set; } = 10;
 
@@ -39,6 +43,12 @@ public partial class Mob : CharacterBody3D
     public void Squash(int multiplier = 1)
     {
         EmitSignal(SignalName.Squashed, multiplier);
+
+        HitMarker hitMarker = HitMarkerScene.Instantiate<HitMarker>();
+        hitMarker.Initialize(Position, multiplier);
+        GetTree().CurrentScene.AddChild(hitMarker);
+
         QueueFree();
+
     }
 }

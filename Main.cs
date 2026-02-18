@@ -6,6 +6,9 @@ public partial class Main : Node
     [Export]
     public PackedScene MobScene { get; set; }
 
+    [Export]
+    public PackedScene HitMarkerScene { get; set; }
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -20,6 +23,8 @@ public partial class Main : Node
     private void OnMobTimerTimeout()
     {
         Mob mob = MobScene.Instantiate<Mob>();
+
+        mob.HitMarkerScene = HitMarkerScene;
 
         var mobSpawnLocation = GetNode<PathFollow3D>("SpawnPath/SpawnLocation");
 

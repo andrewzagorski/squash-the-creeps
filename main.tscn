@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://cyxhh7ddkn62q" path="res://fonts/Montserrat-Medium.ttf" id="4_lquwl"]
 [ext_resource type="Script" uid="uid://b6yqacnxiq0jo" path="res://ScoreLabel.cs" id="5_7mycd"]
 [ext_resource type="Script" uid="uid://w6u2b0ed152s" path="res://Score.cs" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://d01qu4ggmixxl" path="res://hit_marker.tscn" id="7_272bh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
 size = Vector3(60, 2, 60)
@@ -38,6 +39,7 @@ default_font_size = 22
 [node name="Main" type="Node" unique_id=2056861258]
 script = ExtResource("1_h2yge")
 MobScene = ExtResource("2_1bvp3")
+HitMarkerScene = ExtResource("7_272bh")
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=755846192]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
